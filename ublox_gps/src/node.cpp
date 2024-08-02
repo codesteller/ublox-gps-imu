@@ -368,7 +368,7 @@ void UbloxNode::getRosParams() {
   meas_rate_ = 1000 / rate_;
 
   // activate/deactivate any config
-  this->declare_parameter("config_on_startup", true);
+  this->declare_parameter("config_on_startup", false);
   this->declare_parameter("raw_data", false);
   this->declare_parameter("clear_bbr", false);
   this->declare_parameter("save_on_shutdown", false);
@@ -772,11 +772,11 @@ bool UbloxNode::configureUblox() {
                                   " SBAS.");
         }
       }
-      if (!gps_->setPpp(getRosBoolean(this, "enable_ppp"))) {
-        throw std::runtime_error(std::string("Failed to ") +
-                                (getRosBoolean(this, "enable_ppp") ? "enable" : "disable")
-                                + " PPP.");
-      }
+      // if (!gps_->setPpp(getRosBoolean(this, "enable_ppp"))) {
+      //   throw std::runtime_error(std::string("Failed to ") +
+      //                           (getRosBoolean(this, "enable_ppp") ? "enable" : "disable")
+      //                           + " PPP.");
+      // }
       if (!gps_->setDynamicModel(dmodel_)) {
         throw std::runtime_error("Failed to set model: " + dynamic_model_ + ".");
       }
