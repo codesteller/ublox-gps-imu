@@ -48,7 +48,12 @@ def generate_launch_description():
     ublox_gps_node = launch_ros.actions.Node(package='ublox_gps',
                                              executable='ublox_gps_node',
                                              output='both',
-                                             parameters=[params])
+                                             parameters=[params],
+                                             remappings=[
+                                            ('imu_meas', 'imu/data_raw'),]
+                )
+    
+    
 
     return launch.LaunchDescription([ublox_gps_node,
 
